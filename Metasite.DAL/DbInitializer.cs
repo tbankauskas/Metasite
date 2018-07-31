@@ -62,7 +62,11 @@ namespace Metasite.DAL
         private static DateTime GetRandomDatetime(Random random)
         {
             var range = (DateTime.Today - StartDate).Days;
-            return StartDate.AddDays(random.Next(range));
+            return StartDate.AddDays(random.Next(range))
+                .AddHours(random.Next(0, 24))
+                .AddMinutes(random.Next(0, 60))
+                .AddSeconds(random.Next(0, 60))
+                .AddMilliseconds(random.Next(0, 1000));
         }
     }
 }

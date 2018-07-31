@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Metasite.DAL.Dtos;
+using Metasite.DAL.Entities;
 using Metasite.DAL.Interfaces;
 
 namespace Metasite.DAL.Repositories
@@ -16,6 +17,42 @@ namespace Metasite.DAL.Repositories
 
         public List<EventLogDto> GetEventLog(FilterDto filter)
         {
+            var iqu = ImplementFilters(filter);
+            var result = iqu.Select(a => new EventLogDto
+            {
+                Duration = a.Duration,
+                EventType = a.EventType.Type,
+                Timestamp = a.Timestamp,
+                MsIsdnNumber = a.MsIsdn.MsIsdnNumber
+            }).ToList();
+            return result;
+        }
+
+        public List<EventTopDto> GetTops(FilterDto filter)
+        {
+            var iqu = ImplementFilters(filter);
+            IQueryable<EventTopDto> tops;
+            if (filter.Type == "sms")
+                tops = iqu.GroupBy(a => a.MsIsdn.MsIsdnNumber)
+                   .Select(g =>
+                   new EventTopDto
+                   {
+                       MsIsdnNumber = g.Key,
+                       Number = g.Count()
+                   });
+            else
+                tops = iqu.GroupBy(a => a.MsIsdn.MsIsdnNumber)
+                   .Select(g =>
+                   new EventTopDto
+                   {
+                       MsIsdnNumber = g.Key,
+                       Number = g.Sum(a => a.Duration == null ? 0 : (int)a.Duration)
+                   });
+            return tops.OrderByDescending(o => o.Number).Take(5).ToList();
+        }
+
+        private IQueryable<EventLog> ImplementFilters(FilterDto filter)
+        {
             var iqu = _context.EventLogs.AsQueryable();
             if (filter != null)
             {
@@ -26,14 +63,8 @@ namespace Metasite.DAL.Repositories
                 if (!string.IsNullOrEmpty(filter.Type))
                     iqu = iqu.Where(a => a.EventType.Type == filter.Type);
             }
-            var result = iqu.Select(a => new EventLogDto
-            {
-                Duration = a.Duration,
-                EventType = a.EventType.Type,
-                Timestamp = a.Timestamp,
-                MsIsdnNumber = a.MsIsdn.MsIsdnNumber
-            }).ToList();
-            return result;
+
+            return iqu;
         }
 
         public List<EventTypeDto> GetEventTypes()

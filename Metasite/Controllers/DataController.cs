@@ -28,5 +28,12 @@ namespace Metasite.Controllers
         {
             return _dataRepository.GetEventLog(filter);
         }
+
+        [HttpPost]
+        [Route("api/data/eventtops")]
+        public IEnumerable<EventTopDto> GetTops([FromBody] FilterDto filter)
+        {
+            return _dataRepository.GetTops(filter);
+        }
     }
 }

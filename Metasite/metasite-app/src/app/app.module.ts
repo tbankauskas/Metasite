@@ -4,9 +4,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
   MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule,
-  MatTableModule } from '@angular/material';
+  MatTableModule
+} from '@angular/material';
+
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule }
+  from '@angular/material-moment-adapter';
 
 import { AppComponent } from './app.component';
 
@@ -27,9 +33,13 @@ import { AppComponent } from './app.component';
     MatButtonModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatMomentDateModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide: MAT_DATE_LOCALE, useValue: 'lt' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

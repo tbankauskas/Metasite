@@ -6,9 +6,21 @@
     margin-top: 10px;
 }
 
+.tableContainer {
+    height: 400px;
+    width: 900px;
+    overflow: auto;  
+}
+
 table {
     margin-left: 20px;
-    margin-right: 300px;
     margin-top:10px;
-    width: 90%;
+    width: 860px;
+  }
+
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  .mat-column-select {
+    overflow: initial;
   }

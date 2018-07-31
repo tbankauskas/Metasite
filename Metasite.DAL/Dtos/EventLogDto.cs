@@ -2,9 +2,8 @@
 
 namespace Metasite.DAL.Dtos
 {
-    public class EventLogDto
+    public class EventLogDto: EventBaseDto
     {
-        public string MsIsdnNumber { get; set; }
         public string EventType { get; set; }
         public int? Duration { get; set; }
         public DateTime Timestamp { get; set; }

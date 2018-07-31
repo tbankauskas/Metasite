@@ -6,6 +6,7 @@ namespace Metasite.DAL.Interfaces
     public interface IDataRepository
     {
         List<EventLogDto> GetEventLog(FilterDto filter);
+        List<EventTopDto> GetTops(FilterDto filter);
         List<EventTypeDto> GetEventTypes();
     }
 }
