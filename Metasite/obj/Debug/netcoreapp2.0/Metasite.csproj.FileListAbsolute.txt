@@ -12,17 +12,3 @@ C:\Tomas\Metasite-master\Metasite\obj\Debug\netcoreapp2.0\Metasite.AssemblyInfo.
 C:\Tomas\Metasite-master\Metasite\obj\Debug\netcoreapp2.0\Metasite.csproj.CopyComplete
 C:\Tomas\Metasite-master\Metasite\obj\Debug\netcoreapp2.0\Metasite.dll
 C:\Tomas\Metasite-master\Metasite\obj\Debug\netcoreapp2.0\Metasite.pdb
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.deps.json
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.runtimeconfig.json
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.runtimeconfig.dev.json
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.dll
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.pdb
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.DAL.dll
-C:\Tomas\Projects\Metasite\Metasite\bin\Debug\netcoreapp2.0\Metasite.DAL.pdb
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.csprojAssemblyReference.cache
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.csproj.CoreCompileInputs.cache
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.AssemblyInfoInputs.cache
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.AssemblyInfo.cs
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.csproj.CopyComplete
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.dll
-C:\Tomas\Projects\Metasite\Metasite\obj\Debug\netcoreapp2.0\Metasite.pdb
