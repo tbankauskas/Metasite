@@ -1,0 +1,21 @@
+<mat-form-field>
+  <input matInput [matDatepicker]="pickerFrom" placeholder="Date from:">
+  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+  <mat-datepicker #pickerFrom></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="pickerTo" placeholder="Date to:">
+  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+  <mat-datepicker #pickerTo></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Choose type">
+    <mat-option *ngFor="let type of eventTypes" [value]="type.type">
+      {{type.type}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button mat-raised-button>Filter</button>
