@@ -1,21 +1,51 @@
-<mat-form-field>
-  <input matInput [matDatepicker]="pickerFrom" placeholder="Date from:">
-  <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-  <mat-datepicker #pickerFrom></mat-datepicker>
-</mat-form-field>
+<div class="filters">
+  <mat-form-field>
+    <input matInput [matDatepicker]="pickerFrom" placeholder="Date from:" [(ngModel)]="filter.dateFrom">
+    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+    <mat-datepicker #pickerFrom></mat-datepicker>
+  </mat-form-field>
 
-<mat-form-field>
-  <input matInput [matDatepicker]="pickerTo" placeholder="Date to:">
-  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-  <mat-datepicker #pickerTo></mat-datepicker>
-</mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="pickerTo" placeholder="Date to:" [(ngModel)]="filter.dateTo">
+    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTo></mat-datepicker>
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-select placeholder="Choose type">
-    <mat-option *ngFor="let type of eventTypes" [value]="type.type">
-      {{type.type}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Choose type" [(value)]="filter.type">
+      <mat-option *ngFor="let type of eventTypes" [value]="type.type">
+        {{type.type}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="filters">
+  <mat-checkbox [(ngModel)]="filter.filterTop5">Filter top 5</mat-checkbox>
+</div>
+<button class="filters filterButton" mat-raised-button (click)="filterForm()">Filter</button>
 
-<button mat-raised-button>Filter</button>
+<table mat-table [dataSource]="eventLog" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="msIsdnNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> MsIsdn </th>
+      <td mat-cell *matCellDef="let element"> {{element.msIsdnNumber}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="eventType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.eventType}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="duration">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+      <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="timestamp">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

@@ -5,10 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
-  MatInputModule, MatButtonModule, MatSelectModule } from '@angular/material';
+  MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule,
+  MatTableModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { importType } from '@angular/compiler/src/output/output_ast';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,9 @@ import { importType } from '@angular/compiler/src/output/output_ast';
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

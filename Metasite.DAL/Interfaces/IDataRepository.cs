@@ -5,7 +5,7 @@ namespace Metasite.DAL.Interfaces
 {
     public interface IDataRepository
     {
-        List<EventsCountDto> GetEventsCountByType(int eventTypeId);
+        List<EventLogDto> GetEventLog(FilterDto filter);
         List<EventTypeDto> GetEventTypes();
     }
 }

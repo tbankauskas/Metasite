@@ -14,22 +14,31 @@ namespace Metasite.DAL.Repositories
             _context = context;
         }
 
-        public List<EventsCountDto> GetEventsCountByType(int eventTypeId)
+        public List<EventLogDto> GetEventLog(FilterDto filter)
         {
-            var result = (from e in _context.EventLogs
-                          where e.EventTypeId == eventTypeId
-                          group e by e.EventTypeId into g
-                          select new EventsCountDto
-                          {
-                              EventType = g.Select(a => a.EventType.Type).FirstOrDefault(),
-                              EventsCount = g.Count()
-                          }).ToList();
+            var iqu = _context.EventLogs.AsQueryable();
+            if (filter != null)
+            {
+                if (filter.DateFrom.HasValue)
+                    iqu = iqu.Where(a => a.Timestamp >= filter.DateFrom);
+                if (filter.DateTo.HasValue)
+                    iqu = iqu.Where(a => a.Timestamp <= filter.DateTo);
+                if (!string.IsNullOrEmpty(filter.Type))
+                    iqu = iqu.Where(a => a.EventType.Type == filter.Type);
+            }
+            var result = iqu.Select(a => new EventLogDto
+            {
+                Duration = a.Duration,
+                EventType = a.EventType.Type,
+                Timestamp = a.Timestamp,
+                MsIsdnNumber = a.MsIsdn.MsIsdnNumber
+            }).ToList();
             return result;
         }
 
         public List<EventTypeDto> GetEventTypes()
         {
-            return _context.EventTypes.Select(a => new EventTypeDto {Type = a.Type, EventTypeId = a.EventTypeId}).ToList();
+            return _context.EventTypes.Select(a => new EventTypeDto { Type = a.Type, EventTypeId = a.EventTypeId }).ToList();
         }
     }
 }

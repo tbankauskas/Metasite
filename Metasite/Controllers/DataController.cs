@@ -22,28 +22,11 @@ namespace Metasite.Controllers
             return _dataRepository.GetEventTypes();
         }
 
-        [HttpGet]
-        public IEnumerable<EventsCountDto> Get()
-        {
-            return _dataRepository.GetEventsCountByType(1);
-        }
-
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("api/data/eventlog")]
+        public IEnumerable<EventLogDto> Get([FromBody] FilterDto filter)
         {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return _dataRepository.GetEventLog(filter);
         }
     }
 }
