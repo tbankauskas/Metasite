@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /Metasite/metasite-app/.vscode
+/Metasite/metasite-app/dist/out-tsc
