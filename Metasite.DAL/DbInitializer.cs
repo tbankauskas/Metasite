@@ -6,7 +6,7 @@ namespace Metasite.DAL
 {
     public class DbInitializer
     {
-        private static readonly DateTime startDate = new DateTime(2015, 1, 1);
+        private static readonly DateTime StartDate = new DateTime(2015, 1, 1);
 
         public static void Initialize(MSContext context)
         {
@@ -19,34 +19,31 @@ namespace Metasite.DAL
             var random = new Random();
 
             context.EventTypes.AddRange(
-                new EventType() { EventTypeId = 1, Type = "sms" },
-                new EventType() { EventTypeId = 2, Type = "call" });
+                new EventType { EventTypeId = 1, Type = "sms" },
+                new EventType { EventTypeId = 2, Type = "call" });
 
-            for (int i = 1; i <= 100; i++)
+            for (var i = 1; i <= 100; i++)
             {
-                string finalNumber = GetRandomNumber(random);
+                var finalNumber = GetRandomNumber(random);
                 if (context.MsIsdns.FirstOrDefault(a => a.MsIsdnNumber == finalNumber) != null)
                     continue;
-                var ms = new MsIsdn()
+                var ms = new MsIsdn
                 {
                     MsIsdnId = i,
                     MsIsdnNumber = finalNumber
                 };
                 context.MsIsdns.Add(ms);
             }
-            
+
             foreach (var item in context.MsIsdns.Local.ToList())
             {
                 var rnd = random.Next(15);
-                for (int i = 0; i < rnd; i++)
+                for (var i = 0; i < rnd; i++)
                 {
-                    var log = new EventLog()
-                    {
-                        Duration = random.Next(300),
-                        EventTypeId = random.Next(1, 3),
-                        Timestamp = GetRandomDatetime(random),
-                        MsIsdn = item
-                    };
+                    var log = new EventLog { EventTypeId = random.Next(1, 3) };
+                    log.Duration = log.EventTypeId == 1 ? (int?)null : random.Next(300);
+                    log.Timestamp = GetRandomDatetime(random);
+                    log.MsIsdn = item;
                     context.EventLogs.Add(log);
                 }
             }
@@ -64,8 +61,8 @@ namespace Metasite.DAL
 
         private static DateTime GetRandomDatetime(Random random)
         {
-            int range = (DateTime.Today - startDate).Days;
-            return startDate.AddDays(random.Next(range));
+            var range = (DateTime.Today - StartDate).Days;
+            return StartDate.AddDays(random.Next(range));
         }
     }
 }

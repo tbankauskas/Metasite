@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Metasite.DAL;
-using Metasite.DAL.Entities;
+using Metasite.DAL.Dtos;
+using Metasite.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Metasite.Controllers
 {
 
-    [Route("api/[controller]")]
     public class DataController : Controller
     {
-        private readonly MSContext _context;
-
-        public DataController(MSContext context)
+        private readonly IDataRepository _dataRepository;
+        public DataController(IDataRepository dataRepository)
         {
-            _context = context;
+            _dataRepository = dataRepository;
         }
-        // GET api/values
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("api/data/eventtypes")]
+        public IEnumerable<EventTypeDto> GetEventTypes()
         {
-
-            return new string[] { "value1", "value2" };
+            return _dataRepository.GetEventTypes();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public IEnumerable<EventsCountDto> Get()
         {
-            return "value";
+            return _dataRepository.GetEventsCountByType(1);
         }
 
         // POST api/values

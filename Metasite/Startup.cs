@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Metasite.DAL;
+﻿using Metasite.DAL;
+using Metasite.DAL.Interfaces;
+using Metasite.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Metasite
 {
@@ -28,6 +24,7 @@ namespace Metasite
             services.AddMvc();
 
             services.AddDbContext<MSContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MSDatabase")));
+            services.AddScoped<IDataRepository, DataRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +35,7 @@ namespace Metasite
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(b=>b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseMvc();
         }
     }
