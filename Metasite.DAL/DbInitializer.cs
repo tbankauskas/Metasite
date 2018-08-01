@@ -18,15 +18,17 @@ namespace Metasite.DAL
 
             var random = new Random();
 
+            //adding event types
             context.EventTypes.AddRange(
                 new EventType { EventTypeId = 1, Type = "sms" },
                 new EventType { EventTypeId = 2, Type = "call" });
 
+            //adding 100 recods to MsIsdn witn random numbers
             for (var i = 1; i <= 100; i++)
             {
                 var finalNumber = GetRandomNumber(random);
                 if (context.MsIsdns.FirstOrDefault(a => a.MsIsdnNumber == finalNumber) != null)
-                    continue;
+                    continue; //if already exist do not add cause number is unique
                 var ms = new MsIsdn
                 {
                     MsIsdnId = i,
@@ -35,6 +37,7 @@ namespace Metasite.DAL
                 context.MsIsdns.Add(ms);
             }
 
+            //for each MsIsdn number generating random number event log records
             foreach (var item in context.MsIsdns.Local.ToList())
             {
                 var rnd = random.Next(15);
@@ -51,6 +54,7 @@ namespace Metasite.DAL
             context.SaveChanges();
         }
 
+        //generate random msisdn number with some patern
         private static string GetRandomNumber(Random random)
         {
             var rndInt = random.Next(1, 99999);
@@ -59,6 +63,7 @@ namespace Metasite.DAL
             return finalNumber;
         }
 
+        //generate random datetime value from StartDate till today
         private static DateTime GetRandomDatetime(Random random)
         {
             var range = (DateTime.Today - StartDate).Days;

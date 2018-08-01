@@ -58,8 +58,10 @@ namespace Metasite.DAL.Repositories
             {
                 if (filter.DateFrom.HasValue)
                     iqu = iqu.Where(a => a.Timestamp >= filter.DateFrom);
+
                 if (filter.DateTo.HasValue)
                     iqu = iqu.Where(a => a.Timestamp <= filter.DateTo);
+
                 if (!string.IsNullOrEmpty(filter.Type))
                     iqu = iqu.Where(a => a.EventType.Type == filter.Type);
             }
