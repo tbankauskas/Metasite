@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metasite", "Metasite\Metasite.csproj", "{4224FDBD-76FA-46DD-8D71-ADFEC05E2374}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metasite", "Metasite\Metasite.csproj", "{4224FDBD-76FA-46DD-8D71-ADFEC05E2374}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metasite.DAL", "Metasite.DAL\Metasite.DAL.csproj", "{66A71063-B75B-4DC8-80B9-7CF359AA8ED2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Metasite.DAL", "Metasite.DAL\Metasite.DAL.csproj", "{66A71063-B75B-4DC8-80B9-7CF359AA8ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metasite.UnitTests", "Metasite.UnitTests\Metasite.UnitTests.csproj", "{CC727A5A-E814-499B-A9AB-1E76B60F8C7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{66A71063-B75B-4DC8-80B9-7CF359AA8ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66A71063-B75B-4DC8-80B9-7CF359AA8ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66A71063-B75B-4DC8-80B9-7CF359AA8ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC727A5A-E814-499B-A9AB-1E76B60F8C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC727A5A-E814-499B-A9AB-1E76B60F8C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC727A5A-E814-499B-A9AB-1E76B60F8C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC727A5A-E814-499B-A9AB-1E76B60F8C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

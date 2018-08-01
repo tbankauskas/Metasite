@@ -20,7 +20,7 @@
   </mat-form-field>
 </div>
 <div class="filters">
-  <mat-checkbox [(ngModel)]="filter.filterTop5">Filter top 5</mat-checkbox>
+  <mat-checkbox [(ngModel)]="filter.filterTop5" [disabled]="!filter.type">Filter top 5</mat-checkbox>
 </div>
 <button class="filters filterButton" mat-raised-button (click)="filterForm()">Filter</button>
 

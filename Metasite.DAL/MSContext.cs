@@ -8,8 +8,8 @@ namespace Metasite.DAL
         public MSContext(DbContextOptions<MSContext> options) : base(options)
         {
         }
-        public DbSet<MsIsdn> MsIsdns { get; set; }
-        public DbSet<EventType> EventTypes { get; set; }
-        public DbSet<EventLog> EventLogs { get; set; }
+        public virtual DbSet<MsIsdn> MsIsdns { get; set; }
+        public virtual DbSet<EventType> EventTypes { get; set; }
+        public virtual DbSet<EventLog> EventLogs { get; set; }
     }
 }
