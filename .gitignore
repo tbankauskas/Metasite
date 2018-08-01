@@ -263,3 +263,4 @@ __pycache__/
 *.pyc
 /Metasite/metasite-app/.vscode
 /Metasite/metasite-app/dist/out-tsc
+/Metasite/metasite-app/dist/metasite-app
