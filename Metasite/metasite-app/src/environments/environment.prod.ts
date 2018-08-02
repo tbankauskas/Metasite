@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'http://localhost:53079/'
+  API_URL: 'https://metasite-app.azurewebsites.net/'
 };
