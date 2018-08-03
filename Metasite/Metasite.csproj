@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Metasite.DAL\Metasite.DAL.csproj" />
+    <ProjectReference Include="..\Metasite.Repositories\Metasite.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

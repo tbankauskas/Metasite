@@ -1,12 +1,12 @@
 ﻿using Metasite.DAL;
-using Metasite.DAL.Dtos;
-using Metasite.DAL.Interfaces;
-using Metasite.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Metasite.Repositories.Dtos;
+using Metasite.Repositories.Helpers;
+using Metasite.Repositories.Interfaces;
+using Metasite.Repositories.Repositories;
 
 namespace Metasite.UnitTests.Tests.Repositories
 {
@@ -14,20 +14,20 @@ namespace Metasite.UnitTests.Tests.Repositories
     public class DataRepositoryTests
     {
         private IDataRepository _dataRepository;
-        private DbContextOptions<MSContext> _options;
+        private DbContextOptions<MContext> _options;
 
         [TestInitialize]
         public void Initialize()
         {
-            _options = new DbContextOptionsBuilder<MSContext>()
-                .UseInMemoryDatabase(databaseName: "MSContextDatabase")
+            _options = new DbContextOptionsBuilder<MContext>()
+                .UseInMemoryDatabase("MContextDatabase")
                 .Options;
             PrepareDatabaseData();
         }
 
         private void PrepareDatabaseData()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
                 if (!context.EventTypes.Any())
                 {
@@ -43,12 +43,16 @@ namespace Metasite.UnitTests.Tests.Repositories
         [TestMethod]
         public void GetEventLogWhenFilterNull()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
+                //arrange
                 _dataRepository = new DataRepository(context);
+
+                //act
                 var result = _dataRepository.GetEventLog(null);
 
-                Assert.IsInstanceOfType(result, typeof(List<EventLogDto>));
+                //assert
+                AssertType(result);
                 Assert.AreEqual(6, result.Count);
             }
         }
@@ -56,28 +60,29 @@ namespace Metasite.UnitTests.Tests.Repositories
         [TestMethod]
         public void GetEventLogWhenFilterNotNull()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
+                //arrange
                 _dataRepository = new DataRepository(context);
 
-                //when DateFrom.HasValue
+                //act when DateFrom.HasValue
                 var result = _dataRepository.GetEventLog(new FilterDto { DateFrom = DateTime.Now.AddDays(1) });
-                Assert.IsInstanceOfType(result, typeof(List<EventLogDto>));
+                AssertType(result);
                 Assert.AreEqual(5, result.Count);
 
-                //when DateTo.HasValue
+                //act when DateTo.HasValue
                 result = _dataRepository.GetEventLog(new FilterDto { DateTo = DateTime.Now.AddDays(3) });
-                Assert.IsInstanceOfType(result, typeof(List<EventLogDto>));
+                AssertType(result);
                 Assert.AreEqual(3, result.Count);
 
-                //when Type not null
-                result = _dataRepository.GetEventLog(new FilterDto { Type = "sms" });
-                Assert.IsInstanceOfType(result, typeof(List<EventLogDto>));
-                Assert.IsFalse(result.Any(a => a.EventType == "call"));
+                //act when Type not null
+                result = _dataRepository.GetEventLog(new FilterDto { Type = EventTypeEnum.Sms });
+                AssertType(result);
+                Assert.IsFalse(result.Any(a => a.EventType == EventTypeEnum.Call));
 
-                //when passed filter should return count zero
+                //act when passed filter should return count zero
                 result = _dataRepository.GetEventLog(new FilterDto { DateFrom = DateTime.Now, DateTo = DateTime.Now, Type = "MMS" });
-                Assert.IsInstanceOfType(result, typeof(List<EventLogDto>));
+                AssertType(result);
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -85,9 +90,11 @@ namespace Metasite.UnitTests.Tests.Repositories
         [TestMethod]
         public void GetTopsWhenFilterNull()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
+                //arrange
                 _dataRepository = new DataRepository(context);
+                //act assert
                 Assert.ThrowsException<NullReferenceException>(() => _dataRepository.GetTops(null));
             }
         }
@@ -95,23 +102,24 @@ namespace Metasite.UnitTests.Tests.Repositories
         [TestMethod]
         public void GetTopsWhenFilterNotNull()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
+                //arrange
                 _dataRepository = new DataRepository(context);
 
-                //when Type = "sms"
-                var result = _dataRepository.GetTops(new FilterDto { Type = "sms" });
-                Assert.IsInstanceOfType(result, typeof(List<EventTopDto>));
+                //act when Type = "sms"
+                var result = _dataRepository.GetTops(new FilterDto { Type = EventTypeEnum.Sms });
+                AssertType(result);
                 Assert.IsTrue(result.Count <= 5);
 
-                //when Type = "call"
-                result = _dataRepository.GetTops(new FilterDto { Type = "call" });
-                Assert.IsInstanceOfType(result, typeof(List<EventTopDto>));
+                //act when Type = "call"
+                result = _dataRepository.GetTops(new FilterDto { Type = EventTypeEnum.Call });
+                AssertType(result);
                 Assert.IsTrue(result.Count <= 5);
 
-                //when none existing type passed
+                //act when none existing type passed
                 result = _dataRepository.GetTops(new FilterDto { Type = "mms" });
-                Assert.IsInstanceOfType(result, typeof(List<EventTopDto>));
+                AssertType(result);
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -119,14 +127,23 @@ namespace Metasite.UnitTests.Tests.Repositories
         [TestMethod]
         public void GetEventTypesTest()
         {
-            using (var context = new MSContext(_options))
+            using (var context = new MContext(_options))
             {
+                //arrange
                 _dataRepository = new DataRepository(context);
+
+                //act
                 var result = _dataRepository.GetEventTypes();
 
-                Assert.IsInstanceOfType(result, typeof(List<EventTypeDto>));
+                //assert
+                AssertType(result);
                 Assert.AreEqual(2, result.Count);
             }
+        }
+
+        private static void AssertType<T>(T result)
+        {
+            Assert.IsInstanceOfType(result, typeof(T));
         }
     }
 }

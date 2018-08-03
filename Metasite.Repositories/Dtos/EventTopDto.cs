@@ -1,4 +1,4 @@
-﻿namespace Metasite.DAL.Dtos
+﻿namespace Metasite.Repositories.Dtos
 {
     public class EventTopDto : EventBaseDto
     {

@@ -11,8 +11,7 @@ import {
   MatTableModule
 } from '@angular/material';
 
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule }
-  from '@angular/material-moment-adapter';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { AppComponent } from './app.component';
 

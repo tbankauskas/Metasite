@@ -1,6 +1,7 @@
 ﻿using Metasite.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using Metasite.Repositories.Helpers;
 
 namespace Metasite.UnitTests
 {
@@ -13,8 +14,8 @@ namespace Metasite.UnitTests
         private static void BuildEventTypes()
         {
             EventTypes = new List<EventType>(){
-                new EventType { EventTypeId = 1, Type = "sms" },
-                new EventType { EventTypeId = 2, Type = "call" } }
+                new EventType { EventTypeId = 1, Type = EventTypeEnum.Sms },
+                new EventType { EventTypeId = 2, Type = EventTypeEnum.Call } }
             ;
         }
 

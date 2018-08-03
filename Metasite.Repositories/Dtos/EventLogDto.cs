@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Metasite.DAL.Dtos
+namespace Metasite.Repositories.Dtos
 {
     public class EventLogDto: EventBaseDto
     {

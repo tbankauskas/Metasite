@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Metasite.DAL
 {
-    public class MSContext : DbContext
+    public class MContext : DbContext
     {
-        public MSContext(DbContextOptions<MSContext> options) : base(options)
+        public MContext(DbContextOptions options) : base(options)
         {
         }
         public virtual DbSet<MsIsdn> MsIsdns { get; set; }

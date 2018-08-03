@@ -1,6 +1,6 @@
 ﻿using Metasite.DAL;
-using Metasite.DAL.Interfaces;
-using Metasite.DAL.Repositories;
+using Metasite.Repositories.Interfaces;
+using Metasite.Repositories.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +15,8 @@ namespace Metasite
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             //Configuration = configuration;
@@ -29,12 +29,12 @@ namespace Metasite
         {
             services.AddMvc();
 
-            services.AddDbContext<MSContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MSDatabase")));
+            services.AddDbContext<MContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MDatabase")));
             services.AddScoped<IDataRepository, DataRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MSContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MContext context)
         {
             context.Database.Migrate();
             if (env.IsDevelopment())
