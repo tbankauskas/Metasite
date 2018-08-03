@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Metasite.DAL.Migrations
 {
-    [DbContext(typeof(MSContext))]
+    [DbContext(typeof(MContext))]
     [Migration("20180730211541_Initial")]
     partial class Initial
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Metasite.DAL.Dtos;
-using Metasite.DAL.Interfaces;
+using Metasite.Repositories.Dtos;
+using Metasite.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Metasite.Controllers

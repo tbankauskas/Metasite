@@ -18,7 +18,7 @@ namespace Metasite
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<MSContext>();
+                    var context = services.GetRequiredService<MContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

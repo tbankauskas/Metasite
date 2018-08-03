@@ -8,7 +8,7 @@ namespace Metasite.DAL
     {
         private static readonly DateTime StartDate = new DateTime(2015, 1, 1);
 
-        public static void Initialize(MSContext context)
+        public static void Initialize(MContext context)
         {
             context.Database.EnsureCreated();
             if (context.MsIsdns.Any())

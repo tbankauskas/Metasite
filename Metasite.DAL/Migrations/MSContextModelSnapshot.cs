@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Metasite.DAL.Migrations
 {
-    [DbContext(typeof(MSContext))]
+    [DbContext(typeof(MContext))]
     partial class MSContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
